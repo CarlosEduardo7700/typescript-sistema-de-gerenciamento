@@ -11,10 +11,6 @@ interface FuncionarioEfetivo extends Funcionario {
     calculaParticipacaoDeLucros(lucro: number): number;
 }
 
-interface FuncionarioVoluntario extends Funcionario {
-    escreveRelatorio(): void;
-}
-
 class FuncionarioEfetivo implements FuncionarioEfetivo {
     constructor(nome: string, cargaHoraria: number, salario: number) {
         this.nome = nome;
@@ -37,13 +33,12 @@ class FuncionarioEfetivo implements FuncionarioEfetivo {
     }
 }
 
-class FuncionarioVoluntario implements FuncionarioVoluntario {
-    orientador: Funcionario;
+class Pesquisador {
 
-    constructor(nome: string, cargaHorariaExtensao: number, funciarioEfetivo: Funcionario) {
+    constructor(public nome: string, public cargaHoraria: number, public orientador: Funcionario) {
         this.nome = nome;
-        this.cargaHoraria = cargaHorariaExtensao;
-        this.orientador = funciarioEfetivo;
+        this.cargaHoraria = cargaHoraria;
+        this.orientador = orientador;
     }
 
     escreveRelatorio(): void {
@@ -56,7 +51,7 @@ class FuncionarioVoluntario implements FuncionarioVoluntario {
 }
 
 const funcionarioEfetivo = new FuncionarioEfetivo("João", 40, 2400);
-const funcionarioVoluntario = new FuncionarioVoluntario("Enzo", 20, funcionarioEfetivo);
+const pesquisador = new Pesquisador("Enzo", 20, funcionarioEfetivo);
 
 //Efetivo
 console.log("nome:", funcionarioEfetivo.nome);
@@ -64,6 +59,6 @@ console.log("salário bruto:", funcionarioEfetivo.salario);
 console.log("salário líquido:", funcionarioEfetivo.calculaSalarioLiquido());
 console.log("salário com PL:", funcionarioEfetivo.calculaParticipacaoDeLucros(2.5), "\n");
 
-//Voluntário
-console.log("nome:", funcionarioVoluntario.nome);
-funcionarioVoluntario.escreveRelatorio();
+//Pesquisador
+console.log("nome:", pesquisador.nome);
+pesquisador.escreveRelatorio();
